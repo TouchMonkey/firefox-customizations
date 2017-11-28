@@ -1,0 +1,117 @@
+/* %AppData%\Mozilla\Firefox\Profiles\XXXXXXXX.default\chrome\userChrome.css */
+
+@namespace xul url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+
+.tabbrowser-tab[fadein]:not([pinned]) { min-width: 40px !important; max-width: 210px !important; }
+
+#context-back image,
+    #context-forward image,
+    #context-reload image,
+    #context-stop image,
+    #context-bookmarkpage image
+{
+    display: none !important;
+}
+    
+/* to hide the entire context-nav menu items use the above with this code */
+/* #context-navigation, #context-sep-navigation { display:none!important; } */
+/* and get rid of the following code */
+
+#context-back:after,
+    #context-forward:after,
+    #context-reload:after,
+    #context-stop:after,
+    #context-bookmarkpage:after
+{
+    content: attr(aria-label) !important;
+}
+
+#context-navigation
+{
+    -moz-box-orient: vertical !important;
+}
+
+#context-navigation > .menuitem-iconic
+{
+    -moz-box-pack: start !important;
+}
+
+
+/* Reduce the "white flash" in new tabs */
+browser[type="content-primary"], 
+browser[type="content"] {
+    background: #778899 !important;
+}
+
+
+
+/*  
+  Firefox 57 users: https://www.jeffersonscher.com/gm/url-bar-tweaks.html 
+  You can copy/paste into a userChrome.css file, see https://www.userchrome.org/ 
+  Firefox 52-56 users: roll back your Stylish to version 2.1.1 or 2.0.7 here: 
+  https://addons.mozilla.org/firefox/addon/stylish/versions/ 
+  Then find Stylish on the Add-ons page, click its More link, and turn off updates 
+*/ 
+@-moz-document url(chrome://browser/content/browser.xul) { 
+  /* Remove " - Visit" or " - Search with" bar in the drop-down */ 
+  #PopupAutoCompleteRichResult richlistitem:first-of-type[type*="heuristic"], 
+  #PopupAutoCompleteRichResult richlistitem:first-of-type[actiontype="searchengine"], 
+  #PopupAutoCompleteRichResult richlistitem:first-of-type[actiontype="visiturl"], 
+  #PopupAutoCompleteRichResult richlistitem:first-of-type[actiontype="keyword"] { 
+    display:none !important; 
+  } 
+  #PopupAutoCompleteRichResult .autocomplete-richlistbox { 
+    padding-top: 0 !important; 
+    padding-bottom: 0 !important; 
+  } 
+ 
+  /* Restore persistent display of drop-marker */ 
+  #urlbar:not(:hover) > .urlbar-textbox-container > .urlbar-history-dropmarker { 
+    opacity: 1 !important; 
+  } 
+  /* Set max-height for items visible without scrolling */ 
+  #PopupAutoCompleteRichResult .autocomplete-richlistbox { 
+    /* height:auto doesn't work in photon */ 
+    max-height: calc(30px * 20) !important; 
+  } 
+  /* Default drop-down width */ 
+  /* Default font sizes */ 
+  /* Dark Themed Drop-down */ 
+  /* Dark Theme - Firefox 48+ */ 
+  #PopupAutoCompleteRichResult .autocomplete-richlistbox { 
+    background-color: #111 !important; 
+  } 
+  #PopupAutoCompleteRichResult .autocomplete-richlistitem { 
+    border-bottom-color: #333 !important; 
+  } 
+  .autocomplete-richlistitem .ac-title,  
+  .autocomplete-richlistitem .ac-action, 
+  .autocomplete-richlistitem .ac-separator { 
+    color: #777 !important; 
+  } 
+  .autocomplete-richlistitem[selected=true] { 
+    background-color: #666 !important; 
+  } 
+  .autocomplete-richlistitem[selected=true] .ac-title,  
+  .ac-title[selected], 
+  .autocomplete-richlistitem[selected=true] .ac-action, 
+  .ac-action[selected], 
+  .autocomplete-richlistitem[selected=true] .ac-separator, 
+  .ac-separator[selected] { 
+    color: #eee !important; 
+  } 
+  .autocomplete-richlistitem[selected=true] .ac-url,  
+  .ac-url[selected] { 
+    color: #69f !important; 
+  } 
+  /* Use default text matching style */ 
+ 
+  /* Ability to scroll in Fx57 */ 
+  #PopupAutoCompleteRichResult .autocomplete-richlistbox > scrollbox { 
+    overflow-y: auto !important;  
+    padding-right: 3px !important; 
+  } 
+  #PopupAutoCompleteRichResult .autocomplete-richlistbox { 
+    padding-right: 0 !important; 
+  } 
+}
